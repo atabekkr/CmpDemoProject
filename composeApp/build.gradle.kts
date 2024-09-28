@@ -115,13 +115,10 @@ android {
         compose = true
         buildConfig = true
     }
+    flavorDimensions += listOf("DEV")
     dependencies {
         debugImplementation(compose.uiTooling)
     }
-}
-dependencies {
-    implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.material3.desktop)
 }
 
 compose.desktop {
@@ -132,7 +129,10 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.atabekdev.kmpdemoproject"
             packageVersion = "1.0.1"
-            version = 2
+            tasks.withType<JavaExec> {
+                systemProperty("app.version.code", "2")
+                systemProperty("app.version.name", "1.0.1")
+            }
         }
     }
 }
